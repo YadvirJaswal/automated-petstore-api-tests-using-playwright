@@ -6,18 +6,18 @@ namespace SwaggerPetstoreAutomation
     public class BaseTest : IAsyncLifetime
     {
         protected IPlaywright Playwright;
-        protected IAPIRequestContext APIRequestContext;
+        public IAPIRequestContext apiRequestContext;
         public async Task InitializeAsync()
         {
             Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-            APIRequestContext = await Playwright.APIRequest.NewContextAsync(new APIRequestNewContextOptions
+            apiRequestContext = await Playwright.APIRequest.NewContextAsync(new APIRequestNewContextOptions
             {
-                BaseURL = "https://petstore.swagger.io/v2"
+                BaseURL = "https://petstore.swagger.io"
             });
         }
         public async Task DisposeAsync()
         {
-            await APIRequestContext.DisposeAsync();
+            await apiRequestContext.DisposeAsync();
         }
     }
 }
