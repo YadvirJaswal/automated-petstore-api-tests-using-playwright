@@ -39,5 +39,25 @@ namespace SwaggerPetstoreAutomation
             Assert.Equal(petData.Category.Name,responseBody.Category.Name);
             Assert.Equal(petData.Status,responseBody.Status);
         }
+
+        [Fact]
+        public async Task GetPetById_ShouldReturnSuccessAndCorrectData()
+        {
+            // Assert: Specify the Id of the pet
+            var id = "9222968140497181060";
+
+            // Act : Send get request
+            var response = await APIRequestContext.GetAsync($"/v2/pet/{id}");
+
+            // Assert : Validate response
+            Assert.Equal(200,response.Status);
+
+            // Deserialize response body
+            var responseBody = await response.JsonAsync<PetModel>();
+            Assert.NotNull(responseBody);
+            Assert.Equal(id.ToString(), responseBody.Id.ToString());
+            Assert.Equal("Fluffy", responseBody.Name);
+            Assert.Equal("available", responseBody.Status);
+        }
     }
 }
