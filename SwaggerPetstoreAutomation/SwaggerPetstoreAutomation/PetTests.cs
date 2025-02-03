@@ -69,7 +69,5 @@ namespace SwaggerPetstoreAutomation
             var verifyResponse = await apiRequestContext.GetAsync($"/v2/pet/{petId}");
             Assert.Equal(404, verifyResponse.Status);
         }
- 
-        
     }
 }
