@@ -90,5 +90,43 @@ namespace SwaggerPetstoreAutomation.Tests
             var verifyResponse = await apiRequestContext.GetAsync($"/v2/user/ {fetchedUser.UserName}");
             Assert.Equal(404, verifyResponse.Status);
         }
+
+        [Fact]
+        public async Task Test_UserLogin()
+        {
+            // Step 1: Create a user
+
+            // Arrange : Define payload for the request
+            var newUser = new UserModel
+            {
+                Id = 0, // The id is generated dynamically by the server
+                UserName = "testuser123",
+                FirstName = "Scott",
+                LastName = "Grady",
+                Email = "scottgrady@gmail.com",
+                Password = "Scott123",
+                Phone = "1234567890",
+                UserStatus = 1
+            };
+
+            // Act : Send post request
+            var postResponse = await apiRequestContext.PostAsync("/v2/user", new APIRequestContextOptions
+            {
+                DataObject = newUser
+            });
+
+            // Assert : Validate response
+            Assert.Equal(200, postResponse.Status);
+
+            // Step 2: Login the user
+            var loginResponse = await apiRequestContext.GetAsync("/v2/user/login?username=testuser123&password=Scott123");
+            Assert.Equal(200,loginResponse.Status);
+
+            var loginText = await loginResponse.TextAsync();
+
+            // Step 3: Ensure response contains a success message
+            Assert.Contains("logged in",loginText);
+
+        }
     }
 }
