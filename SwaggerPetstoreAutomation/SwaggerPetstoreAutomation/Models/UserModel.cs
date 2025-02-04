@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace SwaggerPetstoreAutomation.Models
 {
     public class UserModel
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("username")]
         public string UserName { get; set; }
@@ -31,6 +26,7 @@ namespace SwaggerPetstoreAutomation.Models
         public string Phone { get; set; }
 
         [JsonPropertyName("userStatus")]
-        public int UserStatus {  get; set; }
+        public int UserStatus { get; set; }
+    
     }
 }
