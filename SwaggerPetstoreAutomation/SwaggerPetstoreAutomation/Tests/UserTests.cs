@@ -126,7 +126,18 @@ namespace SwaggerPetstoreAutomation.Tests
 
             // Step 3: Ensure response contains a success message
             Assert.Contains("logged in",loginText);
+        }
 
+        [Fact]
+        public async Task Test_UserLogout()
+        {
+            // Step 1: Logout the user
+            var logoutResponse = await apiRequestContext.GetAsync("/v2/user/logout");
+            Assert.Equal(200,logoutResponse.Status);
+            var logoutResponseText = await logoutResponse.TextAsync();
+
+            // Step 2: Validate Successfull logout response
+            Assert.Contains("ok",logoutResponseText);
         }
     }
 }
