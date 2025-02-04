@@ -1,12 +1,8 @@
 ﻿using Microsoft.Playwright;
-using System.Text.Json;
 using SwaggerPetstoreAutomation.Models;
-using Xunit.Sdk;
-using Xunit;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 
 namespace SwaggerPetstoreAutomation
-{ 
+{
     public class PetTests : BaseTest
     {
         [Fact]
